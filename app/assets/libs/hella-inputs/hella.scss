@@ -27,25 +27,49 @@ $inputButtonFontSize: 1em;
 $inputButtonFontSize: bold;
 
 // Button, Submit Effective3d
-$inputButtonEffective3dTransition: top .15s ease-out, box-shadow .15s ease-out;
+$inputButtonEffective3dTransition: top 0.15s ease-out, box-shadow 0.15s ease-out;
 $inputButtonEffective3dActiveTop: 5px;
 
 // Button, Submit Effective Outline
-$inputButtonEffectiveOutlineTransition: box-shadow .15s ease-out;
+$inputButtonEffectiveOutlineTransition: box-shadow 0.15s ease-out;
 $inputButtonEffectiveOutlineWidth: 4px;
+
+// File Selector Variables
+$hellaFileSelectorBorderRadius: 10px;
+$hellaFileSelectorPadding: 5px;
+$hellaFileSelectorMargin: 5px;
+
+$hellaFileSelectorFontSize: 1.5em;
+$hellaFileSelectorTextShadow: 0 0 1px rgba(0, 0, 0, .5);
+
+$hellaFileSelectorFileNameHeight:20px;
+$hellaFileSelectorFileNameBorderRadius:5px;
+$hellaFileSelectorFileNamePadding:2px 5px;
+$hellaFileSelectorFileNameBackgroundColor:rgb(108, 117, 125);
+$hellaFileSelectorFileNameColor:white;
+$hellaFileSelectorFileNameFontSize:.65em;
+
 
 // Dark Mode
 $darkInputBackground: #252937;
 $darkInputColor: #6c757d;
 $darkInputPlaceholderColor: #6c757d;
 $darkInputTextShadow: 0 0 5px rgba(0, 0, 0, 0.3);
+
 $darkInputPrefixColor: #6c757d;
 $darkInputPrefixTextShadow: 0 0 5px rgba(0, 0, 0, 0.3);
-$darkInputButtonEffective3dBoxShadow: 0 5px 0 0 rgba(86,94,100, 1);
-$darkInputButtonEffectiveOutlineBoxShadow: 0 0 0 #{$inputButtonEffectiveOutlineWidth} rgba(143,149,170, .5);
+
+$darkInputPasswordToggleColor: rgb(108,117,125);
+
+$darkInputButtonEffective3dBoxShadow: 0 5px 0 0 rgba(86, 94, 100, 1);
+$darkInputButtonEffectiveOutlineBoxShadow: 0 0 0 #{$inputButtonEffectiveOutlineWidth}
+  rgba(143, 149, 170, 0.5);
+
+$darkHellaFileSelectorBackgroundColor: rgb(37,41,55);
+$darkHellaFileSelectorIconColor: rgb(108,117,125);
+$darkHellaFileSelectorIconActiveColor: rgba(255,125,136, 1);
 
 // Light Mode
-// $inputBackground:#C2D3E1;
 $inputBackground: #c6d3eb;
 $inputColor: #3b3f46;
 $inputPlaceholderColor: #3b3f46;
@@ -54,10 +78,16 @@ $inputTextShadow: none;
 $inputPrefixColor: #3b3f46;
 $inputPrefixTextShadow: none;
 
+$inputPasswordToggleColor: rgb(59,63,70);
+
 $inputCustomPlaceholderColor: #3b3f46;
 $inputCustomPlaceholderTextShadow: none;
 $inputButtonEffective3dBoxShadow: 0 5px 0 0 rgba(108, 117, 125, 1);
-$inputButtonEffectiveOutlineBoxShadow: 0 0 0 #{$inputButtonEffectiveOutlineWidth} rgba(84,90,100, .5);
+$inputButtonEffectiveOutlineBoxShadow: 0 0 0 #{$inputButtonEffectiveOutlineWidth}
+  rgba(84, 90, 100, 0.5);
+$hellaFileSelectorBackgroundColor: rgb(198, 211, 235);
+$hellaFileSelectorIconColor: rgb(108, 117, 125);
+$hellaFileSelectorIconActiveColor: rgba(255,125,136, 1);
 
 .hella-container {
   min-width: 250px;
@@ -113,7 +143,6 @@ $inputButtonEffectiveOutlineBoxShadow: 0 0 0 #{$inputButtonEffectiveOutlineWidth
       }
       // End Of Hella Input [button, submit]
     }
-
     // End Of Hella Input
   }
 
@@ -157,6 +186,7 @@ $inputButtonEffectiveOutlineBoxShadow: 0 0 0 #{$inputButtonEffectiveOutlineWidth
     width: 0;
     position: absolute;
     right: 17px;
+    color: $inputPasswordToggleColor;
     font-size: $inputPasswordToggleFontSize;
     display: flex;
     justify-content: center;
@@ -165,6 +195,78 @@ $inputButtonEffectiveOutlineBoxShadow: 0 0 0 #{$inputButtonEffectiveOutlineWidth
       padding-right: 35px;
     }
     // End Of Hella Password Toggle
+  }
+
+  .hella-file-selector-container {
+    display: flex;
+    align-items: center;
+    &.hella-fluid {
+      width:100%;
+      .hella-file-selector {
+        width: 100%;
+      }
+    } 
+    .hella-file-selector {
+      width: 4em;
+      height: 4em;
+      background-color: $hellaFileSelectorBackgroundColor;
+      border-radius: $hellaFileSelectorBorderRadius;
+      padding: $hellaFileSelectorPadding;
+      margin: $hellaFileSelectorMargin;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      .file-selector-icon {
+        color: $hellaFileSelectorIconColor;
+        font-size: $hellaFileSelectorFontSize;
+        text-shadow: $hellaFileSelectorTextShadow;
+        transition: transform .2s ease-out, color .3s ease-out;
+        &.active {
+          transform: rotateZ(45deg);
+          color: $darkHellaFileSelectorIconActiveColor;
+          &:hover {
+            transform: rotateZ(45deg) scale(1.2);
+          }
+        }
+      }
+      input[type="file"].hella-input {
+        display: none;
+      }
+      .hella-file-name {
+        max-width: 100%;
+        height: $hellaFileSelectorFileNameHeight;
+        border-radius: $hellaFileSelectorFileNameBorderRadius;
+        padding: $hellaFileSelectorFileNamePadding;
+        position: absolute;
+        background-color: $hellaFileSelectorFileNameBackgroundColor;
+        color: $hellaFileSelectorFileNameColor;
+        font-size: $hellaFileSelectorFileNameFontSize;
+        white-space: nowrap;
+        bottom: -23px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        // End Of Hella File Name
+      }
+      .hella-file-counter {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(108, 117, 125);
+        box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+        color: whitesmoke;
+        border-radius: 50%;
+        font-size: 0.75em;
+        font-weight: 500;
+      }
+    }
+    // End Of Hella File
   }
 
   // End Of Hella Container
@@ -179,8 +281,8 @@ html.hella-dark {
       &::placeholder {
         color: $darkInputPlaceholderColor;
       }
-      &[type='button'].hella-input,
-      &[type='submit'].hella-input {
+      &[type="button"].hella-input,
+      &[type="submit"].hella-input {
         &.hella-effective-3d {
           box-shadow: $darkInputButtonEffective3dBoxShadow;
           &:active {
@@ -203,5 +305,25 @@ html.hella-dark {
       color: $darkInputPlaceholderColor;
       text-shadow: $darkInputTextShadow;
     }
+    .hella-password-toggle {
+      color:$darkInputPasswordToggleColor;
+    }
+
+    .hella-file-selector-container {
+      .hella-file-selector {
+        background-color:$darkHellaFileSelectorBackgroundColor;
+        .file-selector-icon {
+          color:$darkHellaFileSelectorIconColor;
+          &.active {
+            color:$darkHellaFileSelectorIconActiveColor;
+          }
+        }
+        .hella-file-name {}
+        .hella-file-counter {}
+      }
+    }
+
+    // End Of Hella Container
   }
+  // End Of Dark Mode
 }

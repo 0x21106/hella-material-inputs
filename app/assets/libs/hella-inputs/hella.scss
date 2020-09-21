@@ -22,6 +22,18 @@ $inputCustomPlaceholderActiveTransition: top 0.15s ease-out, left 0.15s ease-out
 // Password Toggle Variables
 $inputPasswordToggleFontSize: 0.9em;
 
+// Hella Button, Submit Variables
+$inputButtonFontSize: 1em;
+$inputButtonFontSize: bold;
+
+// Button, Submit Effective3d
+$inputButtonEffective3dTransition: top .15s ease-out, box-shadow .15s ease-out;
+$inputButtonEffective3dActiveTop: 5px;
+
+// Button, Submit Effective Outline
+$inputButtonEffectiveOutlineTransition: box-shadow .15s ease-out;
+$inputButtonEffectiveOutlineWidth: 4px;
+
 // Dark Mode
 $darkInputBackground: #252937;
 $darkInputColor: #6c757d;
@@ -29,6 +41,8 @@ $darkInputPlaceholderColor: #6c757d;
 $darkInputTextShadow: 0 0 5px rgba(0, 0, 0, 0.3);
 $darkInputPrefixColor: #6c757d;
 $darkInputPrefixTextShadow: 0 0 5px rgba(0, 0, 0, 0.3);
+$darkInputButtonEffective3dBoxShadow: 0 5px 0 0 rgba(86,94,100, 1);
+$darkInputButtonEffectiveOutlineBoxShadow: 0 0 0 #{$inputButtonEffectiveOutlineWidth} rgba(143,149,170, .5);
 
 // Light Mode
 // $inputBackground:#C2D3E1;
@@ -42,6 +56,8 @@ $inputPrefixTextShadow: none;
 
 $inputCustomPlaceholderColor: #3b3f46;
 $inputCustomPlaceholderTextShadow: none;
+$inputButtonEffective3dBoxShadow: 0 5px 0 0 rgba(108, 117, 125, 1);
+$inputButtonEffectiveOutlineBoxShadow: 0 0 0 #{$inputButtonEffectiveOutlineWidth} rgba(84,90,100, .5);
 
 .hella-container {
   min-width: 250px;
@@ -54,9 +70,7 @@ $inputCustomPlaceholderTextShadow: none;
     width: 100%;
   }
 
-  input[type="text"].hella-input,
-  input[type="password"].hella-input,
-  input[type="email"].hella-input {
+  input.hella-input {
     width: $inputWidth;
     height: $inputHeight;
     background: $inputBackground;
@@ -73,6 +87,33 @@ $inputCustomPlaceholderTextShadow: none;
       color: $inputPlaceholderColor;
     }
 
+    &[type="button"].hella-input,
+    &[type="submit"].hella-input {
+      @extend .hella-input;
+      font-size: $inputButtonFontSize;
+      font-weight: $inputButtonFontSize;
+      &.hella-effective-3d {
+        position: relative;
+        top: 0;
+        transition: $inputButtonEffective3dTransition;
+        box-shadow: $inputButtonEffective3dBoxShadow;
+        &:active {
+          top: $inputButtonEffective3dActiveTop;
+          box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+        }
+      }
+
+      &.hella-effective-outline {
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+        transition: $inputButtonEffectiveOutlineTransition;
+        &:active,
+        &:focus {
+          box-shadow: $inputButtonEffectiveOutlineBoxShadow;
+        }
+      }
+      // End Of Hella Input [button, submit]
+    }
+
     // End Of Hella Input
   }
 
@@ -82,9 +123,7 @@ $inputCustomPlaceholderTextShadow: none;
     font-size: $inputPrefixFontSize;
     color: $inputPrefixColor;
     text-shadow: $inputPrefixTextShadow;
-    & ~ input[type="text"].hella-input,
-    & ~ input[type="password"].hella-input,
-    & ~ input[type="email"].hella-input {
+    & ~ input.hella-input {
       padding-left: 35px;
       & + .hella-placeholder {
         margin-left: 35px;
@@ -119,12 +158,10 @@ $inputCustomPlaceholderTextShadow: none;
     position: absolute;
     right: 17px;
     font-size: $inputPasswordToggleFontSize;
-    display:flex;
-    justify-content:center;
+    display: flex;
+    justify-content: center;
     cursor: pointer;
-    & ~ input[type="text"].hella-input,
-    & ~ input[type="password"].hella-input,
-    & ~ input[type="email"].hella-input {
+    & ~ input.hella-input {
       padding-right: 35px;
     }
     // End Of Hella Password Toggle
@@ -135,14 +172,27 @@ $inputCustomPlaceholderTextShadow: none;
 
 html.hella-dark {
   .hella-container {
-    input[type="text"].hella-input,
-    input[type="password"].hella-input,
-    input[type="email"].hella-input {
+    input.hella-input {
       background: $darkInputBackground;
       color: $darkInputColor;
       text-shadow: $darkInputTextShadow;
       &::placeholder {
         color: $darkInputPlaceholderColor;
+      }
+      &[type='button'].hella-input,
+      &[type='submit'].hella-input {
+        &.hella-effective-3d {
+          box-shadow: $darkInputButtonEffective3dBoxShadow;
+          &:active {
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+          }
+        }
+        &.hella-effective-outline {
+          &:focus,
+          &:active {
+            box-shadow: $darkInputButtonEffectiveOutlineBoxShadow;
+          }
+        }
       }
     }
     .hella-prefix {

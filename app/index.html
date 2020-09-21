@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/libs/hella-inputs/hella.css">
+</head>
+<body class="m-5">
+    <div id="app" class="container">
+        <h1 class="display-3 mb-5 text-center text-danger font-weight-bold">Hella Inputs</h1>
+
+        <h3 class="h3 ml-5 pl-5 text-secondary font-weight-bold mb-2">Standart Hella Input</h3>
+        <div class="row px-5 mx-1">
+            <div class="col-6 px-5 d-flex">
+                <input type="text" class="hella-input" placeholder="Username">
+            </div>
+            <div class="col-6 px-5 d-flex justify-content-center">
+                <input type="password" class="hella-input" placeholder="Password">
+            </div>
+        </div>
+
+        <h3 class="h3 ml-5 pl-5 text-secondary font-weight-bold mt-5 mb-2">Hella Input With Icons</h3>
+        <div class="row px-5 mx-1">
+            <div class="col-6 px-5 d-flex">
+                <input type="text" class="hella-input" placeholder="Username" data-hella-prefix="fas fa-user">
+            </div>
+            <div class="col-6 px-5 d-flex justify-content-center">
+                <input type="password" class="hella-input" placeholder="Password" data-hella-prefix="fas fa-key">
+            </div>
+        </div>
+
+        <h3 class="h3 ml-5 pl-5 text-secondary font-weight-bold mt-5 mb-2">Custom and Animated Placeholder</h3>
+        <div class="row px-5 mx-1">
+            <div class="col-6 px-5 d-flex">
+                <input type="text" class="hella-input" data-hella-placeholder="Username" data-hella-prefix="fas fa-user">
+            </div>
+            <div class="col-6 px-5 d-flex justify-content-center">
+                <input type="password" class="hella-input" data-hella-placeholder="Password" data-hella-prefix="fas fa-key">
+            </div>
+        </div>
+
+        <h3 class="h3 ml-5 pl-5 text-secondary font-weight-bold mt-5 mb-2">Password Toggler</h3>
+        <div class="row px-5 mx-1">
+            <div class="col-6 px-5 d-flex">
+                <input type="password" class="hella-input" data-hella-password-toggle="true" placeholder="Password">
+            </div>
+            <div class="col-6 px-5 d-flex justify-content-center">
+                <input type="password" class="hella-input" data-hella-password-toggle="true" data-hella-placeholder="Password" data-hella-prefix="fas fa-key">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <script src="assets/libs/hella-inputs/hella.js"></script>
+</body>
+</html>

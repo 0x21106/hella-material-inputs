@@ -1,0 +1,157 @@
+// Variables
+$inputWidth: 100%;
+$inputHeight: 40px;
+$inputBorderRadius: 5px;
+$inputPadding: 0 10px 0 10px;
+$inputMargin: 5px 0;
+$inputFontSize: 0.85em;
+$inputFontWeight: 600;
+
+// Prefix Variables
+$inputPrefixFontSize: 0.85em;
+
+// Placeholder Variables
+$inputCustomPlaceholderFontSize: 0.85em;
+$inputCustomPlaceholderFontWeight: 600;
+$inputCustomPlaceholderActiveTop: 5px;
+$inputCustomPlaceholderActiveLeft: -5px;
+$inputCustomPlaceholderActiveFontSize: 0.75em;
+$inputCustomPlaceholderActiveTransition: top 0.15s ease-out, left 0.15s ease-out,
+  font-size 0.15s ease-out;
+
+// Password Toggle Variables
+$inputPasswordToggleFontSize: 0.9em;
+
+// Dark Mode
+$darkInputBackground: #252937;
+$darkInputColor: #6c757d;
+$darkInputPlaceholderColor: #6c757d;
+$darkInputTextShadow: 0 0 5px rgba(0, 0, 0, 0.3);
+$darkInputPrefixColor: #6c757d;
+$darkInputPrefixTextShadow: 0 0 5px rgba(0, 0, 0, 0.3);
+
+// Light Mode
+// $inputBackground:#C2D3E1;
+$inputBackground: #c6d3eb;
+$inputColor: #3b3f46;
+$inputPlaceholderColor: #3b3f46;
+$inputTextShadow: none;
+
+$inputPrefixColor: #3b3f46;
+$inputPrefixTextShadow: none;
+
+$inputCustomPlaceholderColor: #3b3f46;
+$inputCustomPlaceholderTextShadow: none;
+
+.hella-container {
+  min-width: 250px;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  &.hella-block {
+    width: 100%;
+  }
+
+  input[type="text"].hella-input,
+  input[type="password"].hella-input,
+  input[type="email"].hella-input {
+    width: $inputWidth;
+    height: $inputHeight;
+    background: $inputBackground;
+    color: $inputColor;
+    border-radius: $inputBorderRadius;
+    margin: $inputMargin;
+    padding: $inputPadding;
+    font-size: $inputFontSize;
+    font-weight: $inputFontWeight;
+    text-shadow: $inputTextShadow;
+    border: none;
+    outline: none;
+    &::placeholder {
+      color: $inputPlaceholderColor;
+    }
+
+    // End Of Hella Input
+  }
+
+  .hella-prefix {
+    position: absolute;
+    left: 10px;
+    font-size: $inputPrefixFontSize;
+    color: $inputPrefixColor;
+    text-shadow: $inputPrefixTextShadow;
+    & ~ input[type="text"].hella-input,
+    & ~ input[type="password"].hella-input,
+    & ~ input[type="email"].hella-input {
+      padding-left: 35px;
+      & + .hella-placeholder {
+        margin-left: 35px;
+      }
+    }
+    // End Of Hella Prefix
+  }
+
+  .hella-placeholder {
+    color: $inputCustomPlaceholderColor;
+    font-size: $inputCustomPlaceholderFontSize;
+    font-weight: $inputCustomPlaceholderFontWeight;
+    text-shadow: $inputCustomPlaceholderTextShadow;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    &.active {
+      transition: $inputCustomPlaceholderActiveTransition;
+      top: $inputCustomPlaceholderActiveTop;
+      left: $inputCustomPlaceholderActiveLeft;
+      font-size: $inputCustomPlaceholderActiveFontSize;
+    }
+    &.deactive {
+      transition: $inputCustomPlaceholderActiveTransition;
+    }
+    // End Of Hella Placeholder
+  }
+
+  .hella-password-toggle {
+    width: 0;
+    position: absolute;
+    right: 17px;
+    font-size: $inputPasswordToggleFontSize;
+    display:flex;
+    justify-content:center;
+    cursor: pointer;
+    & ~ input[type="text"].hella-input,
+    & ~ input[type="password"].hella-input,
+    & ~ input[type="email"].hella-input {
+      padding-right: 35px;
+    }
+    // End Of Hella Password Toggle
+  }
+
+  // End Of Hella Container
+}
+
+html.hella-dark {
+  .hella-container {
+    input[type="text"].hella-input,
+    input[type="password"].hella-input,
+    input[type="email"].hella-input {
+      background: $darkInputBackground;
+      color: $darkInputColor;
+      text-shadow: $darkInputTextShadow;
+      &::placeholder {
+        color: $darkInputPlaceholderColor;
+      }
+    }
+    .hella-prefix {
+      color: $darkInputPrefixColor;
+      text-shadow: $darkInputPrefixTextShadow;
+    }
+    .hella-placeholder {
+      color: $darkInputPlaceholderColor;
+      text-shadow: $darkInputTextShadow;
+    }
+  }
+}

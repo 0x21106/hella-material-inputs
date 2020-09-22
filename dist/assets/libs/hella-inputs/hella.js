@@ -17,7 +17,11 @@ $(document).ready(function () {
         hellaFileSelectorContainerClass: 'hella-file-selector-container',
         hellaFileSelectorClass: 'hella-file-selector',
         hellaFileNameClass: 'hella-file-name',
-        hellaFileIconClass: 'file-selector-icon'
+        hellaFileIconClass: 'file-selector-icon',
+
+        hellaRadioContainerClass: 'hella-radio-container',
+        hellaRadioSelectorClass: 'hella-radio-selector',
+        hellaRadioLabelClass: 'hella-radio-label'
 
     }
     const hellaInputs = $('.' + options.globalInputClass)
@@ -29,9 +33,10 @@ $(document).ready(function () {
             const placeholder = $(e).data(options.hellaPlaceholderDataName)
             const passwordToggle = $(e).data(options.hellaPasswordToggleDataName)
 
+            const isRadio = $(e).attr('type') == 'radio'
             const isFluid = $(e).hasClass(options.globalInputFluidClass)
             const file = $(e).attr('type') == 'file'
-
+            
             // Wrap each input with div
             $(e).wrap(function () { return "<div class='" + options.globalInputContainerClass + "'></div>"; })
             const parent = $(e).closest('.' + options.globalInputContainerClass);
@@ -59,6 +64,16 @@ $(document).ready(function () {
             if (file) {
                 const fileFluid = isFluid ? options.globalInputFluidClass : '';
                 $(e).wrap(function () { return "<div class='" + fileFluid + " " + options.hellaFileSelectorContainerClass + "'><label class='" + options.hellaFileSelectorClass + "'><span class='file-selector-icon fas fa-plus'></span></label></div>" })
+            }
+
+            if(isRadio) {
+                const parent = $(e).closest('.' + options.globalInputContainerClass)
+                const radio = $(parent).children('input[type=radio].hella-input')
+                
+                $(radio).wrap('<label class="' + options.hellaRadioLabelClass + '"></label>')
+                        .after('<div class="' + options.hellaRadioSelectorClass + '"></div>')
+
+                $(parent).addClass(options.hellaRadioContainerClass)
             }
 
         })

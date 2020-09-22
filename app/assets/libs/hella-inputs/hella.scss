@@ -40,15 +40,20 @@ $hellaFileSelectorPadding: 5px;
 $hellaFileSelectorMargin: 5px;
 
 $hellaFileSelectorFontSize: 1.5em;
-$hellaFileSelectorTextShadow: 0 0 1px rgba(0, 0, 0, .5);
+$hellaFileSelectorTextShadow: 0 0 1px rgba(0, 0, 0, 0.5);
 
-$hellaFileSelectorFileNameHeight:20px;
-$hellaFileSelectorFileNameBorderRadius:5px;
-$hellaFileSelectorFileNamePadding:2px 5px;
-$hellaFileSelectorFileNameBackgroundColor:rgb(108, 117, 125);
-$hellaFileSelectorFileNameColor:white;
-$hellaFileSelectorFileNameFontSize:.65em;
+$hellaFileSelectorFileNameHeight: 20px;
+$hellaFileSelectorFileNameBorderRadius: 5px;
+$hellaFileSelectorFileNamePadding: 2px 5px;
+$hellaFileSelectorFileNameBackgroundColor: rgb(108, 117, 125);
+$hellaFileSelectorFileNameColor: white;
+$hellaFileSelectorFileNameFontSize: 0.65em;
 
+// Hella Radio Variables
+$hellaRadioScale: 25px;
+$hellaRadioMargin: 2px 5px;
+$hellaRadioBorderRadius: 50%;
+$hellaRadioSelectorScale: calc((#{$hellaRadioScale} / 100) * 60);
 
 // Dark Mode
 $darkInputBackground: #252937;
@@ -59,15 +64,18 @@ $darkInputTextShadow: 0 0 5px rgba(0, 0, 0, 0.3);
 $darkInputPrefixColor: #6c757d;
 $darkInputPrefixTextShadow: 0 0 5px rgba(0, 0, 0, 0.3);
 
-$darkInputPasswordToggleColor: rgb(108,117,125);
+$darkInputPasswordToggleColor: rgb(108, 117, 125);
 
 $darkInputButtonEffective3dBoxShadow: 0 5px 0 0 rgba(86, 94, 100, 1);
 $darkInputButtonEffectiveOutlineBoxShadow: 0 0 0 #{$inputButtonEffectiveOutlineWidth}
   rgba(143, 149, 170, 0.5);
 
-$darkHellaFileSelectorBackgroundColor: rgb(37,41,55);
-$darkHellaFileSelectorIconColor: rgb(108,117,125);
-$darkHellaFileSelectorIconActiveColor: rgba(255,125,136, 1);
+$darkHellaFileSelectorBackgroundColor: rgb(37, 41, 55);
+$darkHellaFileSelectorIconColor: rgb(108, 117, 125);
+$darkHellaFileSelectorIconActiveColor: rgba(255, 125, 136, 1);
+
+$darkHellaRadioBackgroundColor: rgb(59, 63, 70);
+$darkHellaRadioSelectorBackgroundColor: rgb(198, 211, 235);
 
 // Light Mode
 $inputBackground: #c6d3eb;
@@ -78,7 +86,7 @@ $inputTextShadow: none;
 $inputPrefixColor: #3b3f46;
 $inputPrefixTextShadow: none;
 
-$inputPasswordToggleColor: rgb(59,63,70);
+$inputPasswordToggleColor: rgb(59, 63, 70);
 
 $inputCustomPlaceholderColor: #3b3f46;
 $inputCustomPlaceholderTextShadow: none;
@@ -87,7 +95,10 @@ $inputButtonEffectiveOutlineBoxShadow: 0 0 0 #{$inputButtonEffectiveOutlineWidth
   rgba(84, 90, 100, 0.5);
 $hellaFileSelectorBackgroundColor: rgb(198, 211, 235);
 $hellaFileSelectorIconColor: rgb(108, 117, 125);
-$hellaFileSelectorIconActiveColor: rgba(255,125,136, 1);
+$hellaFileSelectorIconActiveColor: rgba(255, 125, 136, 1);
+
+$hellaRadioBackgroundColor: rgb(198, 211, 235);
+$hellaRadioSelectorBackgroundColor: rgba(59, 63, 70, 0.6);
 
 .hella-container {
   min-width: 250px;
@@ -201,11 +212,11 @@ $hellaFileSelectorIconActiveColor: rgba(255,125,136, 1);
     display: flex;
     align-items: center;
     &.hella-fluid {
-      width:100%;
+      width: 100%;
       .hella-file-selector {
         width: 100%;
       }
-    } 
+    }
     .hella-file-selector {
       width: 4em;
       height: 4em;
@@ -222,7 +233,7 @@ $hellaFileSelectorIconActiveColor: rgba(255,125,136, 1);
         color: $hellaFileSelectorIconColor;
         font-size: $hellaFileSelectorFontSize;
         text-shadow: $hellaFileSelectorTextShadow;
-        transition: transform .2s ease-out, color .3s ease-out;
+        transition: transform 0.2s ease-out, color 0.3s ease-out;
         &.active {
           transform: rotateZ(45deg);
           color: $darkHellaFileSelectorIconActiveColor;
@@ -268,7 +279,39 @@ $hellaFileSelectorIconActiveColor: rgba(255,125,136, 1);
     }
     // End Of Hella File
   }
-
+  &.hella-radio-container {
+    min-width: 0;
+    width: $hellaRadioScale;
+    height: $hellaRadioScale;
+    background-color: $hellaRadioBackgroundColor;
+    margin: $hellaRadioMargin;
+    border-radius: $hellaRadioBorderRadius;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    .hella-radio-label {
+      width: 100%;
+      height: 100%;
+      border-radius: $hellaRadioBorderRadius;
+      cursor: pointer;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      input[type="radio"]:checked + .hella-radio-selector {
+        width: $hellaRadioSelectorScale;
+        height: $hellaRadioSelectorScale;
+        background-color: $hellaRadioSelectorBackgroundColor;
+        border-radius: $hellaRadioBorderRadius;
+        position: absolute;
+      }
+      input {
+        display: none;
+      }
+    }
+  }
   // End Of Hella Container
 }
 
@@ -306,23 +349,32 @@ html.hella-dark {
       text-shadow: $darkInputTextShadow;
     }
     .hella-password-toggle {
-      color:$darkInputPasswordToggleColor;
+      color: $darkInputPasswordToggleColor;
     }
 
     .hella-file-selector-container {
       .hella-file-selector {
-        background-color:$darkHellaFileSelectorBackgroundColor;
+        background-color: $darkHellaFileSelectorBackgroundColor;
         .file-selector-icon {
-          color:$darkHellaFileSelectorIconColor;
+          color: $darkHellaFileSelectorIconColor;
           &.active {
-            color:$darkHellaFileSelectorIconActiveColor;
+            color: $darkHellaFileSelectorIconActiveColor;
           }
         }
-        .hella-file-name {}
-        .hella-file-counter {}
+        .hella-file-name {
+        }
+        .hella-file-counter {
+        }
       }
     }
-
+    &.hella-radio-container {
+      background-color: $darkHellaRadioBackgroundColor;
+      .hella-radio-label {
+        input[type="radio"]:checked + .hella-radio-selector {
+          background-color: $darkHellaRadioSelectorBackgroundColor;
+        }
+      }
+    }
     // End Of Hella Container
   }
   // End Of Dark Mode

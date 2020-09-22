@@ -21,7 +21,11 @@ $(document).ready(function () {
 
         hellaRadioContainerClass: 'hella-radio-container',
         hellaRadioSelectorClass: 'hella-radio-selector',
-        hellaRadioLabelClass: 'hella-radio-label'
+        hellaRadioLabelClass: 'hella-radio-label',
+
+        hellaCheckboxContainerClass: 'hella-checkbox-container',
+        hellaCheckboxSelectorClass: 'hella-checkbox-selector',
+        hellaCheckboxLabelClass: 'hella-checkbox-label',
 
     }
     const hellaInputs = $('.' + options.globalInputClass)
@@ -33,9 +37,11 @@ $(document).ready(function () {
             const placeholder = $(e).data(options.hellaPlaceholderDataName)
             const passwordToggle = $(e).data(options.hellaPasswordToggleDataName)
 
-            const isRadio = $(e).attr('type') == 'radio'
             const isFluid = $(e).hasClass(options.globalInputFluidClass)
             const file = $(e).attr('type') == 'file'
+            
+            const isRadio = $(e).attr('type') == 'radio'
+            const isCheckbox = $(e).attr('type') == 'checkbox'
             
             // Wrap each input with div
             $(e).wrap(function () { return "<div class='" + options.globalInputContainerClass + "'></div>"; })
@@ -69,11 +75,20 @@ $(document).ready(function () {
             if(isRadio) {
                 const parent = $(e).closest('.' + options.globalInputContainerClass)
                 const radio = $(parent).children('input[type=radio].hella-input')
-                
+
                 $(radio).wrap('<label class="' + options.hellaRadioLabelClass + '"></label>')
                         .after('<div class="' + options.hellaRadioSelectorClass + '"></div>')
 
                 $(parent).addClass(options.hellaRadioContainerClass)
+            }
+
+            if(isCheckbox) {
+                const parent = $(e).closest('.' + options.globalInputContainerClass)
+                const checkbox = $(parent).children('input[type=checkbox].hella-input')
+                $(checkbox).wrap('<label class="' + options.hellaCheckboxLabelClass + '"></label>')
+                        .after('<div class="' + options.hellaCheckboxSelectorClass + '"></div>')
+                        
+                $(parent).addClass(options.hellaCheckboxContainerClass)
             }
 
         })

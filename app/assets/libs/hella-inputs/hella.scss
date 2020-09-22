@@ -45,8 +45,6 @@ $hellaFileSelectorTextShadow: 0 0 1px rgba(0, 0, 0, 0.5);
 $hellaFileSelectorFileNameHeight: 20px;
 $hellaFileSelectorFileNameBorderRadius: 5px;
 $hellaFileSelectorFileNamePadding: 2px 5px;
-$hellaFileSelectorFileNameBackgroundColor: rgb(108, 117, 125);
-$hellaFileSelectorFileNameColor: white;
 $hellaFileSelectorFileNameFontSize: 0.65em;
 
 // Hella Radio Variables
@@ -54,6 +52,12 @@ $hellaRadioScale: 25px;
 $hellaRadioMargin: 2px 5px;
 $hellaRadioBorderRadius: 50%;
 $hellaRadioSelectorScale: calc((#{$hellaRadioScale} / 100) * 60);
+
+// Hella Checkbox Variables
+$hellaCheckboxScale: 25px;
+$hellaCheckboxMargin: 2px 5px;
+$hellaCheckboxBorderRadius: 5px;
+$hellaCheckboxSelectorScale: calc((#{$hellaCheckboxScale} / 100) * 70);
 
 // Dark Mode
 $darkInputBackground: #252937;
@@ -73,9 +77,16 @@ $darkInputButtonEffectiveOutlineBoxShadow: 0 0 0 #{$inputButtonEffectiveOutlineW
 $darkHellaFileSelectorBackgroundColor: rgb(37, 41, 55);
 $darkHellaFileSelectorIconColor: rgb(108, 117, 125);
 $darkHellaFileSelectorIconActiveColor: rgba(255, 125, 136, 1);
+$darkHellaFileSelectorFileNameBackgroundColor: rgb(37, 41, 55);
+$darkHellaFileSelectorFileNameColor: white;
 
 $darkHellaRadioBackgroundColor: rgb(59, 63, 70);
 $darkHellaRadioSelectorBackgroundColor: rgb(198, 211, 235);
+
+$darkHellaCheckboxBackgroundColor: rgb(59, 63, 70);
+$darkHellaCheckboxSelectorBackgroundColor: rgb(198, 211, 235);
+
+
 
 // Light Mode
 $inputBackground: #c6d3eb;
@@ -96,9 +107,14 @@ $inputButtonEffectiveOutlineBoxShadow: 0 0 0 #{$inputButtonEffectiveOutlineWidth
 $hellaFileSelectorBackgroundColor: rgb(198, 211, 235);
 $hellaFileSelectorIconColor: rgb(108, 117, 125);
 $hellaFileSelectorIconActiveColor: rgba(255, 125, 136, 1);
+$hellaFileSelectorFileNameBackgroundColor: rgb(108, 117, 125);
+$hellaFileSelectorFileNameColor: white;
 
 $hellaRadioBackgroundColor: rgb(198, 211, 235);
 $hellaRadioSelectorBackgroundColor: rgba(59, 63, 70, 0.6);
+
+$hellaCheckboxBackgroundColor: rgb(198, 211, 235);
+$hellaCheckboxSelectorBackgroundColor: rgba(59, 63, 70, 0.6);
 
 .hella-container {
   min-width: 250px;
@@ -311,6 +327,37 @@ $hellaRadioSelectorBackgroundColor: rgba(59, 63, 70, 0.6);
         display: none;
       }
     }
+    // End Of Hella Radio
+  }
+
+  &.hella-checkbox-container {
+    min-width: 0;
+    width: $hellaCheckboxScale;
+    height: $hellaCheckboxScale;
+    background-color: $hellaCheckboxBackgroundColor;
+    margin: $hellaCheckboxMargin;
+    border-radius: $hellaCheckboxBorderRadius;
+    .hella-checkbox-label {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      position: relative;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      cursor: pointer;
+      input[type='checkbox']:checked + .hella-checkbox-selector {
+        width: $hellaCheckboxSelectorScale;
+        height: $hellaCheckboxSelectorScale;
+        background-color: $hellaCheckboxSelectorBackgroundColor;
+        position: absolute;
+        border-radius:$hellaCheckboxBorderRadius;
+      }
+      input {
+        display:none;
+      }
+    }
   }
   // End Of Hella Container
 }
@@ -362,6 +409,8 @@ html.hella-dark {
           }
         }
         .hella-file-name {
+          background-color: $darkHellaFileSelectorFileNameBackgroundColor;
+          color: $darkHellaFileSelectorFileNameColor;
         }
         .hella-file-counter {
         }
@@ -372,6 +421,14 @@ html.hella-dark {
       .hella-radio-label {
         input[type="radio"]:checked + .hella-radio-selector {
           background-color: $darkHellaRadioSelectorBackgroundColor;
+        }
+      }
+    }
+    &.hella-checkbox-container {
+      background-color: $darkHellaCheckboxBackgroundColor;
+      .hella-checkbox-label {
+        input[type='checkbox']:checked + .hella-checkbox-selector {
+          background-color:$darkHellaCheckboxSelectorBackgroundColor;
         }
       }
     }

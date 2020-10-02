@@ -116,15 +116,148 @@ $hellaRadioSelectorBackgroundColor: rgba(59, 63, 70, 0.6);
 $hellaCheckboxBackgroundColor: rgb(198, 211, 235);
 $hellaCheckboxSelectorBackgroundColor: rgba(59, 63, 70, 0.6);
 
+// Info Border Width
+$inputHellaInfoBorderWidth: .13em;
+$darkInputHellaInfoBorderWidth: .1em;
+
+// Warning Colors
+$inputHellaWarningBackgroundColor: rgba(255,104,45, .5);
+$inputHellaWarningColor: rgb(255,127,77);
+
+// Danger Colors
+$inputHellaDangerBackgroundColor: rgba(255,45,48, .7);
+$inputHellaDangerColor: rgba(255,45,48, .7);
+
+// Success Colors
+$inputHellaSuccessBackgroundColor: rgba(0,200,104, .7);
+$inputHellaSuccessColor: rgba(0,180,104, .7);
+
+// Dark Warning Color
+$darkInputHellaWarningBackgroundColor: rgba(255,104,45, .9);
+$darkInputHellaWarningColor: rgba(255,127,77, .9);
+
+// Dark Danger Color
+$darkInputHellaDangerBackgroundColor: rgba(255,35,86, .9);
+$darkInputHellaDangerColor: rgba(255,35,86, .85);
+
+// Dark Success Colors
+$darkInputHellaSuccessBackgroundColor: rgba(0,255,132, 1);
+$darkInputHellaSuccessColor: rgb(0,255,132);
+
+// HellaProgressive
+$hellaProgressiveRightOffset: 10px;
+$hellaProgressiveInputPaddingRight: 35px;
+$hellaProgressiveDeactivateTransition: opacity .3s ease-out;
+$hellaProgressiveAnimation:rotate-360 1s linear infinite;
+$hellaProgressiveScale:15px;
+$hellaProgressiveStrokeWidth: 0.1em;
+
+$hellaProgressiveMaskStrokeWidth: 0.12em;
+$hellaProgressiveMaskStrokeLeft: -0.1em;
+$hellaProgressiveMaskStrokeTop: -0.12em;
+
+
+// Light Mode ProgressiveColor
+$hellaProgressiveSuccessColor: rgb(64, 173, 77);
+$hellaProgressiveMaskSuccessColor: rgb(18, 122, 0);
+
+$hellaProgressiveDangerColor: rgb(255,60,73);
+$hellaProgressiveMaskDangerColor: rgba(133, 34, 41, 0.55);
+
+$hellaProgressiveWarningColor: rgb(255,140,0);
+$hellaProgressiveMaskWarningColor: rgba(156, 87, 3, 0.527);
+
+// Dark Mode Progressive Color
+$darkHellaProgressiveSuccessColor: rgb(64, 207, 81);
+$darkHellaProgressiveMaskSuccessColor: rgb(33, 102, 41);
+
+$darkHellaProgressiveDangerColor: rgb(165, 34, 43);
+$darkHellaProgressiveMaskDangerColor: rgba(209, 49, 60, 0.582);
+
+$darkHellaProgressiveWarningColor: rgb(255,140,0);
+$darkHellaProgressiveMaskWarningColor: rgba(71, 40, 1, 0.568);
+
 .hella-container {
   min-width: 250px;
   position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
-
+  
   &.hella-block {
     width: 100%;
+  }
+
+  .hella-progressive-container {
+    width: auto;
+    height: auto;
+    position: absolute;
+    right: $hellaProgressiveRightOffset;
+    border: $hellaProgressiveStrokeWidth solid $hellaProgressiveSuccessColor;
+    border-radius:50%;
+    animation: $hellaProgressiveAnimation;
+    transition: $hellaProgressiveDeactivateTransition;
+    &.hella-deactivated {
+      opacity: 0;
+    }
+    & + input.hella-input {
+      padding-right: $hellaProgressiveInputPaddingRight;
+    }
+    .hella-progressive {
+      width: $hellaProgressiveScale;
+      height: $hellaProgressiveScale;
+      &::after {
+        content:"";
+        width: calc(#{$hellaProgressiveScale} + (#{$hellaProgressiveStrokeWidth * 2}));
+        height: calc(#{$hellaProgressiveScale} + (#{$hellaProgressiveStrokeWidth * 2}));
+        border:#{$hellaProgressiveMaskStrokeWidth} solid transparent;
+        border-top-color:$hellaProgressiveMaskSuccessColor;
+        border-radius:50%;
+        position: absolute;
+        top:$hellaProgressiveMaskStrokeTop;
+        left:$hellaProgressiveMaskStrokeLeft;
+      }
+    }
+    &.half-progressive {
+      border:none !important;
+      .hella-progressive {
+        &::after {
+          border-top-color:$hellaProgressiveSuccessColor;
+        }
+      }
+    }
+    &.danger {
+      border: $hellaProgressiveStrokeWidth solid $hellaProgressiveDangerColor;
+      .hella-progressive {
+        &::after {
+          border-top-color:$hellaProgressiveMaskDangerColor;
+        }
+      }
+      &.half-progressive {
+        border:none !important;
+        .hella-progressive {
+          &::after {
+            border-top-color: $hellaProgressiveDangerColor;
+          }
+        }
+      }
+    }
+    &.warning {
+      border: $hellaProgressiveStrokeWidth solid $hellaProgressiveWarningColor;
+      .hella-progressive {
+        &::after {
+          border-top-color:$hellaProgressiveMaskWarningColor
+        }
+      }
+      &.half-progressive {
+        border:none !important;
+        .hella-progressive {
+          &::after {
+            border-top-color: $hellaProgressiveWarningColor;
+          }
+        }
+      }
+    }
   }
 
   input.hella-input {
@@ -140,6 +273,7 @@ $hellaCheckboxSelectorBackgroundColor: rgba(59, 63, 70, 0.6);
     text-shadow: $inputTextShadow;
     border: none;
     outline: none;
+    transition: background-color .3s ease-out;
     &::placeholder {
       color: $inputPlaceholderColor;
     }
@@ -169,6 +303,27 @@ $hellaCheckboxSelectorBackgroundColor: rgba(59, 63, 70, 0.6);
         }
       }
       // End Of Hella Input [button, submit]
+    }
+    &.hella-warning {
+      box-shadow: 0 0 0 $inputHellaInfoBorderWidth $inputHellaWarningBackgroundColor;
+      &::placeholder,
+      & {
+        color: $inputHellaWarningColor;
+      }
+    }
+    &.hella-danger {
+      box-shadow: 0 0 0 $inputHellaInfoBorderWidth $inputHellaDangerBackgroundColor;
+      &::placeholder,
+      & {
+        color: $inputHellaDangerColor;
+      }
+    }
+    &.hella-success {
+      box-shadow: 0 0 0 $inputHellaInfoBorderWidth $inputHellaSuccessBackgroundColor;
+      &::placeholder,
+      & {
+        color: $inputHellaSuccessColor;
+      }
     }
     // End Of Hella Input
   }
@@ -364,6 +519,54 @@ $hellaCheckboxSelectorBackgroundColor: rgba(59, 63, 70, 0.6);
 
 html.hella-dark {
   .hella-container {
+    .hella-progressive-container {
+      border: $hellaProgressiveStrokeWidth solid $darkHellaProgressiveSuccessColor;
+      .hella-progressive {
+        &::after {
+          border-top-color: $darkHellaProgressiveMaskSuccessColor;
+        }
+      }
+      &.half-progressive {
+        border:none !important;
+        .hella-progressive {
+          &::after {
+            border-top-color: $darkHellaProgressiveSuccessColor;
+          }
+        }
+      }
+      &.danger {
+        border: $hellaProgressiveStrokeWidth solid $darkHellaProgressiveDangerColor;
+        .hella-progressive {
+          &::after {
+            border-top-color: $darkHellaProgressiveMaskDangerColor;
+          }
+        }
+        &.half-progressive {
+          border:none !important;
+          .hella-progressive {
+            &::after {
+              border-top-color: $hellaProgressiveDangerColor;
+            }
+          }
+        }
+      }
+      &.warning {
+        border: $hellaProgressiveStrokeWidth solid $darkHellaProgressiveWarningColor;
+        .hella-progressive {
+          &::after {
+            border-top-color: $darkHellaProgressiveMaskWarningColor;
+          }
+        }
+        &.half-progressive {
+          border:none !important;
+          .hella-progressive {
+            &::after {
+              border-top-color: $darkHellaProgressiveWarningColor;
+            }
+          }
+        }
+      }
+    }
     input.hella-input {
       background: $darkInputBackground;
       color: $darkInputColor;
@@ -384,6 +587,27 @@ html.hella-dark {
           &:active {
             box-shadow: $darkInputButtonEffectiveOutlineBoxShadow;
           }
+        }
+      }
+      &.hella-warning {
+        box-shadow: 0 0 0 $darkInputHellaInfoBorderWidth $darkInputHellaWarningBackgroundColor;
+        &::placeholder,
+        & {
+          color: $darkInputHellaWarningColor;
+        }
+      }
+      &.hella-danger {
+        box-shadow: 0 0 0 $darkInputHellaInfoBorderWidth $darkInputHellaDangerBackgroundColor;
+        &::placeholder,
+        & {
+          color: $darkInputHellaDangerColor;
+        }
+      }
+      &.hella-success {
+        box-shadow: 0 0 0 $darkInputHellaInfoBorderWidth $darkInputHellaSuccessBackgroundColor;
+        &::placeholder,
+        & {
+          color: $darkInputHellaSuccessColor;
         }
       }
     }
@@ -435,4 +659,15 @@ html.hella-dark {
     // End Of Hella Container
   }
   // End Of Dark Mode
+}
+
+
+
+@keyframes rotate-360 {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
 }
